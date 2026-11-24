@@ -8,7 +8,7 @@ import sys
 import pydyf
 
 from . import DEFAULT_OPTIONS, HTML, LOGGER, __version__
-from .pdf import VARIANTS
+from .pdf import PDF_VERSIONS, VARIANTS
 from .text.ffi import pango
 from .urls import URLFetcher
 
@@ -102,7 +102,8 @@ group.add_argument(
     help='Relationship of the attachment file to attach to the PDF')
 group.add_argument('--pdf-identifier', help='PDF file identifier')
 group.add_argument('--pdf-variant', choices=VARIANTS, help='PDF variant to generate')
-group.add_argument('--pdf-version', help='PDF version number')
+group.add_argument(
+    '--pdf-version', choices=PDF_VERSIONS, help='PDF version number')
 group.add_argument('--pdf-forms', action='store_true', help='include PDF forms')
 group.add_argument('--pdf-tags', action='store_true', help='tag PDF for accessibility')
 group.add_argument(

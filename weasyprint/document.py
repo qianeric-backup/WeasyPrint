@@ -17,7 +17,7 @@ from .images import get_image_from_uri as original_get_image_from_uri
 from .layout import LayoutContext, layout_document
 from .logger import LOGGER, PROGRESS_LOGGER
 from .matrix import Matrix
-from .pdf import VARIANTS, generate_pdf
+from .pdf import PDF_VERSIONS, VARIANTS, generate_pdf
 from .pdf.metadata import DocumentMetadata
 from .text.fonts import FontConfiguration
 
@@ -348,6 +348,10 @@ class Document:
         identifier = options['pdf_identifier']
         compress = not options['uncompressed_pdf']
         version = options['pdf_version']
+        if version is not None and version not in PDF_VERSIONS:
+            versions = ', '.join(PDF_VERSIONS)
+            raise ValueError(
+                f'{version!r} is not a valid PDF version, use one of: {versions}')
 
         if target is None:
             output = io.BytesIO()

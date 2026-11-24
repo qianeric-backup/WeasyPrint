@@ -20,6 +20,8 @@ from .anchors import (  # isort:skip
     add_annotations, add_forms, add_links, add_outlines, resolve_links,
     write_pdf_attachment)
 
+PDF_VERSIONS = ('1.4', '1.5', '1.6', '1.7', '2.0')
+
 VARIANTS = {
     name: data
     for variants in (pdfa.VARIANTS, pdfua.VARIANTS, pdfx.VARIANTS, debug.VARIANTS)

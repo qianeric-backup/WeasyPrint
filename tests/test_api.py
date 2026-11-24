@@ -581,6 +581,13 @@ def test_pdf_version():
     stdout = _run('--pdf-version=1.4 --uncompressed-pdf - -', b'test')
     assert b'PDF-1.4' in stdout
 
+    with pytest.raises(SystemExit) as excinfo:
+        _run('--pdf-version=bogus - -')
+    assert excinfo.value.code == 2
+
+    with pytest.raises(ValueError, match='not a valid PDF version'):
+        HTML(string='<p>test</p>').write_pdf(pdf_version='bogus')
+
 
 @assert_no_logs
 def test_pdf_custom_metadata():
